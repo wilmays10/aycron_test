@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <main id="main">
+    <section class="section site-portfolio">
+      <div class="text-center letter-title mb-5">
+        Descubrí todos los modelos
+      </div>
+
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12 col-lg-12 text-start text-lg-end">
+            <div id="filters" class="filters">
+              <a href="#" data-filter="*" class="active">Todos</a>
+              <a href="#" data-filter=".web">Autos</a>
+              <a href="#" data-filter=".design">Pickups y Comerciales</a>
+              <a href="#" data-filter=".branding">SUVs y Crossovers</a>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div id="portfolio-grid" class="row no-gutter">
+        <!-- Acá se insertan los datos dinamicamente -->
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}
+
+{% block javascript %}
+{% endblock javascript %}

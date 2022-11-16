@@ -9,10 +9,14 @@ class Address(models.Model):
     state = models.CharField(_('State'), max_length = 100, blank = True)
     county = models.CharField(_('County'), max_length = 100, blank = True)
 
+    def __str__(self):
+        result = f'{self.street} - {self.number}' if self.street else self.id
+        return result
+
 
 class Warehouse(models.Model):
     code = models.PositiveIntegerField(_('Code'), unique=True)
     name = models.CharField(_('Name'), max_length=255)
-    adress = models.ForeignKey('Address', related_name='warehouses',
+    address = models.ForeignKey(Address, related_name='warehouses',
                                on_delete=models.SET_NULL, null=True,
                                blank=True)
