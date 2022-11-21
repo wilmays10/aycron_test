@@ -1,11 +1,29 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
 footer {
-  position: absolute;
   bottom: 0;
-  width: 98%;
+  width: 100%;
 }
 
 .sidebar-nav {
     margin-top: 20px;
     padding: 0;
     list-style: none;
+}
+
+.section {
+  padding: 7rem 0;
+}
+
+#portfolio-grid {
+  margin-top: 1rem;
+}
+
+#map {
+  border: 1px;
+  margin-top: 1rem;
+
 }

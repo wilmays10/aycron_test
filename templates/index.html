@@ -1,31 +1,78 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <main id="main">
-    <section class="section site-portfolio">
-      <div class="text-center letter-title mb-5">
-        Descubrí todos los modelos
-      </div>
-
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-12 col-lg-12 text-start text-lg-end">
-            <div id="filters" class="filters">
-              <a href="#" data-filter="*" class="active">Todos</a>
-              <a href="#" data-filter=".web">Autos</a>
-              <a href="#" data-filter=".design">Pickups y Comerciales</a>
-              <a href="#" data-filter=".branding">SUVs y Crossovers</a>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div id="portfolio-grid" class="row no-gutter">
-        <!-- Acá se insertan los datos dinamicamente -->
-        </div>
-      </div>
-    </section>
-  </main>
+  <div id="portfolio-grid" class="row no-gutter">
+    <!-- Acá se insertan los datos dinamicamente -->
+  </div>
 {% endblock %}
 
 {% block javascript %}
+  <script>
+    function createNode(element) {
+      return document.createElement(element);
+    }
+
+    function append(parent, el) {
+      return parent.appendChild(el);
+    }
+
+    function load_data(url) {
+        fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data) {
+          data.forEach(function (warehouse){
+            let divMajor = createNode('div');
+            let divbody = createNode('div');
+            let divbtn = createNode('div');
+            let h3 = createNode('h3');
+            let ul = createNode('ul');
+            let li = createNode('li');
+            let li1 = createNode('li');
+            let li2 = createNode('li');
+            let li3 = createNode('li');
+            let download = createNode('a');
+            let del = createNode('a');
+
+            divMajor.className = 'card mb-5';
+            divMajor.style = 'width: 17rem;';
+            divbody.class = 'card-body';
+            h3.innerHTML = warehouse.name;
+            h3.className = 'card-title text-center letter-title-card';
+            li.className = 'card-text';
+            li1.className = 'card-text';
+            li2.className = 'card-text';
+            li3.className = 'card-text';
+            li.innerHTML = 'Address: ' + warehouse.address.street + ' ' + warehouse.address.number;
+            li1.innerHTML = 'Zipcode: ' + warehouse.address.zipcode;
+            li2.innerHTML = 'County: ' + warehouse.address.county;
+            li3.innerHTML = 'State: ' + warehouse.address.state;
+            download.innerHTML = 'Download';
+            download.className = 'btn btn-success';
+            del.innerHTML = 'Delete';
+            del.className = 'btn btn-danger';
+            divbtn.className = 'd-grid gap-2 d-md-flex justify-content-md-center';
+            divbtn.style = 'margin-bottom: 0.5rem!important;';
+
+            append(divbody, h3);
+            append(ul, li);
+            append(ul, li1);
+            append(ul, li2);
+            append(ul, li3);
+            append(divbody, ul);
+            append(divbtn, download);
+            append(divbtn, del);
+            append(divbody, divbtn);
+            append(divMajor, divbody);
+            append(container, divMajor);
+          })
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+    const container = document.getElementById('portfolio-grid');
+    const url = '/api/warehouses/';
+    load_data(url);
+
+  </script>
 {% endblock javascript %}

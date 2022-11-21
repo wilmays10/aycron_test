@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+{% block head %}
+{#  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css">#}
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+{% endblock head %}
+{% block content %}
+    <div class="row g-3 align-items-center mt-1">
+      <div class="col-auto">
+        <label for="inputPassword6" class="col-form-label">Address</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+      </div>
+      <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">
+          Ex: Bv San Juan 861, Córdoba.
+        </span>
+      </div>
+    </div>
+    <div id="map"></div>
+{% endblock %}
+{% block libs_js %}
+{#  <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js"></script>#}
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+  <script src="{% static 'js/map.js' %}"></script>
+{% endblock libs_js %}
